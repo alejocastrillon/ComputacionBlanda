@@ -6,6 +6,7 @@
 package com.alejocastrillon.demo.repositories;
 
 import com.alejocastrillon.demo.entities.VelocidadPunto;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VelocidadPuntoRepository extends JpaRepository<VelocidadPunto, Integer>{
     
+    Optional<VelocidadPunto> findByLatitudAndLongitud(Double latitud, Double longitud);
 }

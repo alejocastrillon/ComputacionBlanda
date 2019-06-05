@@ -6,6 +6,7 @@
 package com.alejocastrillon.demo.repositories;
 
 import com.alejocastrillon.demo.entities.Accidente;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AccidenteRepository extends JpaRepository<Accidente, Integer>{
     
+    List<Accidente> findByLatitudAndLongitud(Double latitud, Double longitud);
 }
