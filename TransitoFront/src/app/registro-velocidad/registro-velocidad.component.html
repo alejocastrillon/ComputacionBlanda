@@ -1,0 +1,30 @@
+<button type="button" (click)="show()" pButton icon="pi pi-info-circle" label="Registrar Velocidad en Punto"></button>
+
+<p-table [value]="velocidades">
+    <ng-template pTemplate="caption">
+        Listado de Velocidades
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Latitud</th>
+            <th>Longitud</th>
+            <th>Velocidad Primaria</th>
+            <th>Velocidad Secundaria</th>
+            <th>Velocidad Terciaria</th>
+            <th>Velocidad Cuarta</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-velocidad>
+        <tr (click)="selectVelocidad(velocidad)">
+            <td>{{velocidad.latitud}}</td>
+            <td>{{velocidad.longitud}}</td>
+            <td>{{velocidad.velocidadPrimaria}}</td>
+            <td>{{velocidad.velocidadSecundaria}}</td>
+            <td>{{velocidad.velocidadTerciaria}}</td>
+            <td>{{velocidad.velocidadCuarta}}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        Total de velocidades: {{velocidades?.length}} velocidades registradas
+    </ng-template>
+</p-table>

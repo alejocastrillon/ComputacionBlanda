@@ -1,0 +1,41 @@
+<div>
+    <div class="map">
+        <div id="map" style="height: 400px; width: 100%" (leafletMapReady)="onMapReady($event)" (leafletClick)="placeMarker($event)" leaflet [leafletOptions]="options"></div>
+    </div>
+    <div class="formAcc">
+        <br>
+        <form [formGroup]="accidenteForm" (ngSubmit)="accidenteForm.valid && saveAccidente()">
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-md-6">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="pi pi-map-marker"></i></span>
+                        <input pInputText formControlName="latitud" [(ngModel)]="accidente.latitud" type="number" pInputText placeholder="Latitud">
+                    </div>
+                </div>
+
+                <div class="ui-g-12 ui-md-6">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="pi pi-map-marker"></i></span>
+                        <input pInputText formControlName="longitud" [(ngModel)]="accidente.longitud" type="number" pInputText placeholder="Longitud">
+                    </div>
+                </div>
+
+                <div class="ui-g-12 ui-md-6">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="pi pi-sun-o"></i></span>
+                        <input pInputText formControlName="nivelLluvia" min="0" max="10" [(ngModel)]="accidente.nivelLluvia" type="number" pInputText placeholder="Nivel de Lluvia">
+                    </div>
+                </div>
+
+                <div class="ui-g-12 ui-md-6">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="pi pi-road"></i></span>
+                        <input pInputText formControlName="estadoCarretera" min="0" max="10" [(ngModel)]="accidente.estadoCarretera" type="number" pInputText placeholder="Estado de la Carretera">
+                    </div>
+                </div>
+            </div>
+            <button pButton type="submit" icon="pi pi-check-circle" [disabled]="!accidenteForm.valid" label="Guardar" class="ui-button-rounded ui-button-success"></button>
+            <button pButton type="button" (click)="cancelSave()" label="Cancelar" class="ui-button-rounded ui-button-secondary"></button>
+        </form>
+    </div>
+</div>

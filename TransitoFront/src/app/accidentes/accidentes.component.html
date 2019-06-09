@@ -1,0 +1,26 @@
+<button type="button" (click)="show()" pButton icon="pi pi-info-circle" label="Registrar Accidente"></button>
+
+<p-table [value]="accidentes">
+    <ng-template pTemplate="caption">
+        Listado de Accidentes
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Latitud</th>
+            <th>Longitud</th>
+            <th>Nivel de Lluvia</th>
+            <th>Estado de la Carretera</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-accidente>
+        <tr (click)="selectAccidente(accidente)">
+            <td>{{accidente.latitud}}</td>
+            <td>{{accidente.longitud}}</td>
+            <td>{{accidente.nivelLluvia}}</td>
+            <td>{{accidente.estadoCarretera}}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        Total de accidentes: {{accidentes?.length}} accidentes
+    </ng-template>
+</p-table>
