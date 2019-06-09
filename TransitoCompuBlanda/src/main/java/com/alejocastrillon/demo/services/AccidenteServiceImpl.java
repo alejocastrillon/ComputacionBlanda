@@ -8,7 +8,9 @@ package com.alejocastrillon.demo.services;
 import com.alejocastrillon.demo.dto.AccidenteDTO;
 import com.alejocastrillon.demo.entities.Accidente;
 import com.alejocastrillon.demo.repositories.AccidenteRepository;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.modelmapper.ModelMapper;
@@ -31,6 +33,7 @@ public class AccidenteServiceImpl implements AccidenteService {
     public AccidenteDTO saveAccidente(AccidenteDTO accidente) {
         AccidenteDTO accidentdto = null;
         if (isValidateAccidente(accidente)) {
+            accidente.setFechaHora(new Timestamp(new Date().getTime()));
             accidentdto = mapper.map(repository.save(mapper.map(accidente, Accidente.class)), AccidenteDTO.class);
         }
         return accidentdto;
@@ -38,8 +41,7 @@ public class AccidenteServiceImpl implements AccidenteService {
     
     private boolean isValidateAccidente(AccidenteDTO accidente) {
         return accidente != null && accidente.getLatitud() != null && accidente.getLongitud() != null 
-                && accidente.getNivelLluvia() != null && accidente.getFechaHora() != null 
-                && accidente.getEstadoCarretera() != null;
+                && accidente.getNivelLluvia() != null && accidente.getEstadoCarretera() != null;
     }
 
     @Override
