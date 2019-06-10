@@ -1,6 +1,6 @@
 <button type="button" (click)="show()" pButton icon="pi pi-info-circle" label="Registrar Accidente"></button>
 
-<p-table [value]="accidentes">
+<p-table [value]="accidentes" [rows]="10" [paginator]="true" [pageLinks]="3" [responsive]="true">
     <ng-template pTemplate="caption">
         Listado de Accidentes
     </ng-template>

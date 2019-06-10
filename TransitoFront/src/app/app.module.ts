@@ -1,10 +1,11 @@
+import { MenuModule } from 'primeng/menu';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ChartModule, CalendarModule, SharedModule, MegaMenuModule, ButtonModule, DialogModule, DialogService, InputTextModule } from 'primeng/primeng';
+import { ChartModule, CalendarModule, SharedModule, MegaMenuModule, ButtonModule, DialogModule, DialogService, InputTextModule, SidebarModule, PanelMenuModule } from 'primeng/primeng';
 import { TableModule } from 'primeng/table';
 import { AccidentesComponent } from './accidentes/accidentes.component';
 import { RegistrarAccidenteComponent } from './accidentes/registrar-accidente/registrar-accidente.component';
@@ -36,6 +37,9 @@ import { DialogRegistroComponent } from './registro-velocidad/dialog-registro/di
     CalendarModule,
     SharedModule,
     MegaMenuModule,
+    MenuModule,
+    SidebarModule,
+    PanelMenuModule,
     CommonModule,
     DynamicDialogModule,
     ButtonModule,

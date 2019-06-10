@@ -1,3 +1,6 @@
-<p-megaMenu [model]="items"></p-megaMenu>
-
+<button type="text" (click)="display = !display" pButton icon="pi pi-th-large"></button>
+<p-sidebar [(visible)]="display" position="left">
+    <p-panelMenu [model]="items"></p-panelMenu>
+</p-sidebar>
+<br/>
 <router-outlet></router-outlet>

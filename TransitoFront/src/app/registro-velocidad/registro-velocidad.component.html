@@ -1,6 +1,6 @@
 <button type="button" (click)="show()" pButton icon="pi pi-info-circle" label="Registrar Velocidad en Punto"></button>
 
-<p-table [value]="velocidades">
+<p-table [value]="velocidades" [rows]="10" [paginator]="true" [pageLinks]="3" [responsive]="true">
     <ng-template pTemplate="caption">
         Listado de Velocidades
     </ng-template>

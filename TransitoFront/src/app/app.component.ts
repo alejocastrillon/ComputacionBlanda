@@ -9,26 +9,16 @@ import { MenuItem } from 'primeng/api';
 })
 export class AppComponent {
   title = 'TransitoFront';
+  display: boolean = false;
   items: MenuItem[] = [{
     label: 'Accidentes',
-    icon: 'fa fa-fw fa-check',
-    url: 'accidentes',
-    items: [
-      [
-        { label: 'Registrar accidentes' },
-        { label: 'Listas de accidentes' }
-      ]
-    ]
+    icon: 'pi pi-exclamation-triangle',
+    url: '#/accidentes'
   },
   {
     label: 'Registro de velocidades',
-    url: 'registro-velocidad',
-    items: [
-      [
-        { label: 'Undo'},
-        { label: 'Redo'}
-      ]
-    ]
+    url: '#/registro-velocidad',
+    icon: 'pi pi-cog'
   }];
 
 
