@@ -19,6 +19,10 @@ export class AppComponent {
     label: 'Registro de velocidades',
     url: '#/registro-velocidad',
     icon: 'pi pi-cog'
+  },
+  {
+    label: 'Sugerencia de velocidad',
+    url: '#/sugerencia'
   }];
 
 

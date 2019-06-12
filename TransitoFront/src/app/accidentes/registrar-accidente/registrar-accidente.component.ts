@@ -42,7 +42,13 @@ export class RegistrarAccidenteComponent implements OnInit {
 
   ngOnInit() {
     this.validateForm();
-    this.setCurrentPosition();
+    if (this.accidente.idaccidente == null) {
+      this.setCurrentPosition();
+    } else {
+      this.latitude = this.accidente.latitud;
+      this.longitud = this.accidente.longitud;
+      this.map.setView(new L.LatLng(this.latitude, this.longitud));
+    }
   }
 
   public validateForm(): void {
@@ -83,6 +89,7 @@ export class RegistrarAccidenteComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitud = position.coords.longitude;
+        this.map.setView(new L.LatLng(this.latitude, this.longitud));
       });
     }
   }

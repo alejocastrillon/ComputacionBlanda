@@ -16,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import { RegistroVelocidadComponent } from './registro-velocidad/registro-velocidad.component';
 import { DialogRegistroComponent } from './registro-velocidad/dialog-registro/dialog-registro.component';
+import { SugerenciaComponent } from './sugerencia/sugerencia.component';
+import { DialogFormularioSugerenciaComponent } from './sugerencia/dialog-formulario-sugerencia/dialog-formulario-sugerencia.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { DialogRegistroComponent } from './registro-velocidad/dialog-registro/di
     AccidentesComponent,
     RegistrarAccidenteComponent,
     RegistroVelocidadComponent,
-    DialogRegistroComponent
+    DialogRegistroComponent,
+    SugerenciaComponent,
+    DialogFormularioSugerenciaComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,8 @@ import { DialogRegistroComponent } from './registro-velocidad/dialog-registro/di
   ],
   entryComponents:[
     RegistrarAccidenteComponent,
-    DialogRegistroComponent
+    DialogRegistroComponent,
+    DialogFormularioSugerenciaComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [DialogService],

@@ -1,3 +1,4 @@
+import { SugerenciaComponent } from './sugerencia/sugerencia.component';
 import { AccidentesComponent } from './accidentes/accidentes.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -6,7 +7,8 @@ import { RegistroVelocidadComponent } from './registro-velocidad/registro-veloci
 const routes: Routes = [
   {path: '', redirectTo: '/accidentes', pathMatch: 'full'},
   {path: 'accidentes',  component: AccidentesComponent},
-  {path: 'registro-velocidad', component: RegistroVelocidadComponent}
+  {path: 'registro-velocidad', component: RegistroVelocidadComponent},
+  {path: 'sugerencia', component: SugerenciaComponent}
 ];
 
 @NgModule({
