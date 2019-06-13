@@ -5,7 +5,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ChartModule, CalendarModule, SharedModule, MegaMenuModule, ButtonModule, DialogModule, DialogService, InputTextModule, SidebarModule, PanelMenuModule } from 'primeng/primeng';
+import { ChartModule, CalendarModule, SharedModule, MegaMenuModule, ButtonModule, DialogModule, DialogService, InputTextModule, SidebarModule, PanelMenuModule, DropdownModule, ProgressBarModule } from 'primeng/primeng';
 import { TableModule } from 'primeng/table';
 import { AccidentesComponent } from './accidentes/accidentes.component';
 import { RegistrarAccidenteComponent } from './accidentes/registrar-accidente/registrar-accidente.component';
@@ -40,6 +40,8 @@ import { DialogFormularioSugerenciaComponent } from './sugerencia/dialog-formula
     ChartModule,
     CalendarModule,
     SharedModule,
+    DropdownModule,
+    ProgressBarModule,
     MegaMenuModule,
     MenuModule,
     SidebarModule,

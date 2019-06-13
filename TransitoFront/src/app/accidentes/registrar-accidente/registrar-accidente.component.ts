@@ -22,6 +22,7 @@ export class RegistrarAccidenteComponent implements OnInit {
   accidenteForm: FormGroup;
   map;
   coordClic;
+  isLoading: boolean = false;
   coordenadas;
   accidente: Accidente;
   latitude: number = 4.791869;
@@ -113,10 +114,13 @@ export class RegistrarAccidenteComponent implements OnInit {
   }
 
   public saveAccidente(): void {
+    this.isLoading = true;
     this.service.saveAccidente(this.accidente).subscribe( res => {
+      this.isLoading = false;
       Swal.fire('Registro accidente', 'Se ha registrado el accidente', 'success');
       this.dialogRef.close(this.accidente);
     }, err => {
+      this.isLoading = false;
       console.log(err);
       Swal.fire('Registro accidente', 'No se ha podido realizar la acción', 'error');
     });

@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/api';
 import { VelocidadPunto } from './../../model/VelocidadPunto.model';
 import { Component, OnInit } from '@angular/core';
-import {tileLayer} from 'leaflet';
+import { tileLayer } from 'leaflet';
 import * as L from 'leaflet';
 import Swal from 'sweetalert2';
 
@@ -22,6 +22,7 @@ export class DialogRegistroComponent implements OnInit {
   map;
   coordClic;
   coordenadas;
+  isLoading: boolean = false;
   velocidad: VelocidadPunto;
   latitude: number = 4.791869;
   longitud: number = -75.689368;
@@ -37,10 +38,15 @@ export class DialogRegistroComponent implements OnInit {
 
   constructor(private dialogRef: DynamicDialogRef, private data: DynamicDialogConfig, private formBuilder: FormBuilder, private service: RegistroVelocidadService) {
     this.velocidad = data.data.velocidad;
-   }
+  }
 
   ngOnInit() {
     this.validateForm();
+    if (this.velocidad.latitud != null) {
+      this.map.setView(new L.LatLng(this.velocidad.latitud, this.velocidad.longitud));
+    } else {
+      this.setCurrentPosition();
+    }
   }
 
   public validateForm(): void {
@@ -87,6 +93,7 @@ export class DialogRegistroComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitud = position.coords.longitude;
+        this.map.setView(new L.LatLng(this.latitude, this.longitud));
       });
     }
   }
@@ -114,10 +121,13 @@ export class DialogRegistroComponent implements OnInit {
   }
 
   public saveVelocidad(): void {
-    this.service.saveVelocidad(this.velocidad).subscribe( res => {
+    this.isLoading = true;
+    this.service.saveVelocidad(this.velocidad).subscribe(res => {
+      this.isLoading = false;
       Swal.fire('Registro de velocidades', 'Se ha realizado el registro exitosamnte', 'success');
       this.dialogRef.close(res);
     }, err => {
+      this.isLoading = false;
       Swal.fire('Registro de velocidades', 'No se ha podido realizar la acción', 'error');
       console.log(err);
     });

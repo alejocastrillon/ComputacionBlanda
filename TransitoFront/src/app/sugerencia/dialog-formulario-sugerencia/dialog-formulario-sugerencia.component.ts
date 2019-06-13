@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/api';
+import { Sugerencia } from './../../model/Sugerencia.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Sugerencia } from 'src/app/model/Sugerencia.model';
+import { DynamicDialogRef, DynamicDialogConfig, SelectItem } from 'primeng/api';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dialog-formulario-sugerencia',
@@ -10,10 +10,20 @@ import { Sugerencia } from 'src/app/model/Sugerencia.model';
 })
 export class DialogFormularioSugerenciaComponent implements OnInit {
 
-  sugerencia: Sugerencia;
-  sugerenciaForm: FormGroup
+  sugerenciaForm: FormGroup;
+  isLoading: boolean = false;
+  sugerencia: Sugerencia = new Sugerencia();
+  nivelesLluvia: Array<SelectItem> = [{label: 'Seco', value: 'seco'}, 
+  {label: 'Llovizna', value: 'llovizna'}, 
+  {label: 'Lluvia Moderada', value: 'lluvia moderada'}, 
+  {label: 'Lluvia Fuerte', value: 'lluvia fuerte'},
+  {label: 'Granizada', value: 'granizada'}];
+  estadosCarretera: Array<SelectItem> = [{label: 'Sin huecos', value: 'sin huecos'},
+  {label: 'Agrietada', value: 'agrietada'},
+  {label: 'Con leves huecos', value:'con leves huecos'},
+  {label: 'Con grandes huecos', value: 'con grandes huecos'}]
 
-  constructor(private dialogRef: DynamicDialogRef, private data: DynamicDialogConfig, private formBuilder: FormBuilder) {
+  constructor(private dialogRef: DynamicDialogRef, private data: DynamicDialogConfig, private formBuilder: FormBuilder) { 
     this.sugerencia.latitud = data.data.latitud;
     this.sugerencia.longitud = data.data.longitud;
   }
@@ -30,13 +40,17 @@ export class DialogFormularioSugerenciaComponent implements OnInit {
       'longitud': [this.sugerencia.longitud, [
         Validators.required
       ]],
-      'intensidadLLuvia': [this.sugerencia.intensidadLluvia, [
+      'intensidadLluvia': [this.sugerencia.intensidadLluvia, [
         Validators.required
       ]],
       'estadoCarretera': [this.sugerencia.estadoCarretera, [
         Validators.required
       ]]
     });
+  }
+
+  public cancelSave(): void {
+    this.dialogRef.close();
   }
 
 }

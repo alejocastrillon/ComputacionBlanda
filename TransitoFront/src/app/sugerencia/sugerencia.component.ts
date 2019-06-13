@@ -62,7 +62,8 @@ export class SugerenciaComponent implements OnInit {
     });
     this.coordClic.addTo(this.map);
     let dialog = this.dialog.open(DialogFormularioSugerenciaComponent, {
-      width: '70%',
+      width: '50%',
+      header: 'Sugerencia de velocidad',
       data: {
         latitud: this.coordenadas.lat,
         longitud: this.coordenadas.lng
