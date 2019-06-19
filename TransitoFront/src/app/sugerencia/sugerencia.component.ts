@@ -1,8 +1,10 @@
 import { DialogFormularioSugerenciaComponent } from './dialog-formulario-sugerencia/dialog-formulario-sugerencia.component';
-import { Component, OnInit } from '@angular/core';
-import {tileLayer} from 'leaflet';
+import { Component, OnInit } from '@angular/core';;
 import * as L from 'leaflet';
+import 'leaflet.markercluster';
 import { DialogService } from 'primeng/api';
+import { AccidentesService } from '../accidentes/accidentes.service';
+import { SugerenciaService } from '../sugerencia.service';
 
 @Component({
   selector: 'app-sugerencia',
@@ -15,20 +17,25 @@ export class SugerenciaComponent implements OnInit {
   coordClic;
   coordenadas;
   latitude: number = 4.791869;
+  clusterData: L.Marker[] = [];
   longitud: number = -75.689368;
+  markerClusterOptions = {
+    zoomToBoundsOnClick: false
+  };
   options = {
     layers: [
-      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       })
     ],
     zoom: 13,
   };
 
-  constructor(private dialog: DialogService) { }
+  constructor(private dialog: DialogService, private accidenteService: AccidentesService) { }
 
   ngOnInit() {
     this.setCurrentPosition();
+    this.getAccidentes();
   }
 
 
@@ -45,6 +52,25 @@ export class SugerenciaComponent implements OnInit {
         this.map.setView(new L.LatLng(this.latitude, this.longitud));
       });
     }
+  }
+
+  public getAccidentes(): void {
+    this.accidenteService.getAccidentes().subscribe( res => {
+      console.log(res);
+      for (const r of res) {
+        let m: L.Marker;
+        m = L.marker([r.latitud, r.longitud], {
+          icon: L.icon({
+            iconSize: [25, 41],
+            iconAnchor: [13, 41],
+            iconUrl: 'leaflet/marker-icon.png',
+            shadowUrl: 'leaflet/marker-shadow.png'
+          })
+        });
+        this.clusterData.push(m);
+      }
+      console.log(this.clusterData);
+    })
   }
 
   public placeMarker($event): void {
@@ -70,4 +96,5 @@ export class SugerenciaComponent implements OnInit {
       }
     });
   }
+
 }

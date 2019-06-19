@@ -1,5 +1,5 @@
 <p-progressBar *ngIf="isLoading" mode="indeterminate"></p-progressBar>
-<form [formGroup]="sugerenciaForm">
+<form [formGroup]="sugerenciaForm" (ngSubmit)="sugerenciaForm.valid && generateSugerencia()">
     <div class="ui-g ui-fluid">
         <div class="ui-g-12 ui-md-6">
             <div class="ui-inputgroup">

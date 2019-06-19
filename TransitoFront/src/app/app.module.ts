@@ -14,6 +14,7 @@ import { DynamicDialogModule } from 'primeng/components/dynamicdialog/dynamicdia
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
+import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluster';
 import { RegistroVelocidadComponent } from './registro-velocidad/registro-velocidad.component';
 import { DialogRegistroComponent } from './registro-velocidad/dialog-registro/dialog-registro.component';
 import { SugerenciaComponent } from './sugerencia/sugerencia.component';
@@ -36,6 +37,7 @@ import { DialogFormularioSugerenciaComponent } from './sugerencia/dialog-formula
     HttpClientModule,
     ReactiveFormsModule,
     LeafletModule,
+    LeafletMarkerClusterModule,
     AppRoutingModule,
     ChartModule,
     CalendarModule,

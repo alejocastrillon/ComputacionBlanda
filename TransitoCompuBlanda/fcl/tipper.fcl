@@ -1,0 +1,54 @@
+FUNCTION_BLOCK Riesgoper	// Block definition (there may be more than one block per file)
+
+// Define input variables
+VAR_INPUT				
+	Estado_Carretera : REAL;
+	Estado_Tiempo : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT				
+	Riesgo : REAL;
+END_VAR
+
+// Fuzzify input variable 'Estado_Carretera': {'Malo', 'Regular' , 'Bueno'}
+FUZZIFY Estado_Carretera			
+	TERM Malo := (0, 1) (4, 0) ; 
+	TERM Regular := (1, 0) (4,1) (6,1) (9,0);
+	TERM Bueno := (6, 0) (9, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 'Estado_Tiempo': { 'Seco', 'Llovizna','Lluvia_Fuerte' }
+FUZZIFY Estado_Tiempo			
+	TERM Seco := (0, 1) (1, 1) (3,0) ;
+	TERM Llovizna := (3,0) (6,1) (6,0);
+	TERM Lluvia_Fuerte := (6,1) (8,1) (9,0);
+END_FUZZIFY
+
+// Defzzzify output variable 'Riesgo' : {'Bajo', 'Medio', 'Alto' }
+DEFUZZIFY Riesgo			
+	TERM Bajo := (0,0) (5,1) (10,0);
+	TERM Medio := (10,0) (15,1) (20,0);
+	TERM Alto := (20,0) (25,1) (30,0);
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+// Inference rules
+RULEBLOCK No1
+	AND : MIN;	// Use 'min' for 'and'
+	ACT : MIN;	// Use 'min' activation method
+	ACCU : MAX;	// Use 'max' accumulation method
+
+	RULE 1 : IF Estado_Carretera IS Malo AND Estado_Tiempo IS Seco THEN Riesgo IS Medio;
+	RULE 2 : IF Estado_Carretera IS Malo AND Estado_Tiempo IS Llovizna THEN Riesgo IS Medio; 
+	RULE 3 : IF Estado_Carretera IS Malo AND Estado_Tiempo IS Lluvia_Fuerte THEN Riesgo IS Alto; 
+	RULE 4 : IF Estado_Carretera IS Regular AND Estado_Tiempo IS Seco THEN Riesgo IS Bajo;
+	RULE 5 : IF Estado_Carretera IS Regular AND Estado_Tiempo IS Llovizna THEN Riesgo IS Medio; 
+	RULE 6 : IF Estado_Carretera IS Regular AND Estado_Tiempo IS Lluvia_Fuerte THEN Riesgo IS Medio; 
+	RULE 2 : IF Estado_Carretera IS Bueno AND Estado_Tiempo IS Seco THEN Riesgo IS Bajo;
+	RULE 2 : IF Estado_Carretera IS Bueno AND Estado_Tiempo IS Llovizna THEN Riesgo IS Medio; 
+	RULE 2 : IF Estado_Carretera IS Bueno AND Estado_Tiempo IS Lluvia_Fuerte THEN Riesgo IS Medio;
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
