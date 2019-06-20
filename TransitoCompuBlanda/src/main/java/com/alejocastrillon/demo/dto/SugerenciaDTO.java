@@ -18,6 +18,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SugerenciaDTO {
     
-    private Double estado;
+    private Integer estado;
     private Integer velocidad;
 }

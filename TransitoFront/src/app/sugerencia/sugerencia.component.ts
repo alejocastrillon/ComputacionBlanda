@@ -4,7 +4,8 @@ import * as L from 'leaflet';
 import 'leaflet.markercluster';
 import { DialogService } from 'primeng/api';
 import { AccidentesService } from '../accidentes/accidentes.service';
-import { SugerenciaService } from '../sugerencia.service';
+import { VelocidadPunto } from '../model/VelocidadPunto.model';
+import { RegistroVelocidadService } from '../registro-velocidad/registro-velocidad.service';
 
 @Component({
   selector: 'app-sugerencia',
@@ -19,6 +20,7 @@ export class SugerenciaComponent implements OnInit {
   latitude: number = 4.791869;
   clusterData: L.Marker[] = [];
   longitud: number = -75.689368;
+  velocidades: Array<VelocidadPunto> = [];
   markerClusterOptions = {
     zoomToBoundsOnClick: false
   };
@@ -31,11 +33,12 @@ export class SugerenciaComponent implements OnInit {
     zoom: 13,
   };
 
-  constructor(private dialog: DialogService, private accidenteService: AccidentesService) { }
+  constructor(private dialog: DialogService, private accidenteService: AccidentesService, private velocidadesService: RegistroVelocidadService) { }
 
   ngOnInit() {
     this.setCurrentPosition();
     this.getAccidentes();
+    this.getVelocidades();
   }
 
 
@@ -73,6 +76,14 @@ export class SugerenciaComponent implements OnInit {
     })
   }
 
+  public getVelocidades(): void {
+    this.velocidadesService.getVelocidades().subscribe( res => {
+      this.velocidades = res;
+    }, err => {
+      this.velocidades = [];
+    })
+  }
+
   public placeMarker($event): void {
     if (this.coordClic != null) {
       this.map.removeLayer(this.coordClic);
@@ -92,7 +103,8 @@ export class SugerenciaComponent implements OnInit {
       header: 'Sugerencia de velocidad',
       data: {
         latitud: this.coordenadas.lat,
-        longitud: this.coordenadas.lng
+        longitud: this.coordenadas.lng,
+        velocidades: this.velocidades
       }
     });
   }

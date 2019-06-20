@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,11 @@ public class VelocidadPunto implements Serializable {
     @Basic(optional = false)
     @Column(name = "idvelocidad")
     private Integer idvelocidad;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "nombre_punto")
+    @Size(min = 1, max = 50)
+    private String nombrePunto;
     @Basic(optional = false)
     @NotNull
     @Column(name = "latitud")

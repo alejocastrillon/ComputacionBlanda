@@ -1,27 +1,38 @@
 <p-progressBar *ngIf="isLoading" mode="indeterminate"></p-progressBar>
 <div class="map">
-    <div id="map" style="height: 400px; width: 100%" (leafletMapReady)="onMapReady($event)" (leafletClick)="placeMarker($event)" leaflet [leafletOptions]="options"></div>
+    <div id="map" style="height: 400px; width: 100%" (leafletMapReady)="onMapReady($event)"
+        (leafletClick)="placeMarker($event)" leaflet [leafletOptions]="options"></div>
 </div>
 <form [formGroup]="velocidadForm" (ngSubmit)="velocidadForm.valid && saveVelocidad()">
     <div class="ui-g ui-fluid">
+        <div class="ui-g-12 ui-md-12">
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="pi pi-home"></i></span>
+                <input pInputText formControlName="nombrePunto" [(ngModel)]="velocidad.nombrePunto" type="text" pInputText
+                    placeholder="Nombre del Punto">
+            </div>
+        </div>
         <div class="ui-g-12 ui-md-6">
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon"><i class="pi pi-map-marker"></i></span>
-                <input pInputText formControlName="latitud" [(ngModel)]="velocidad.latitud" type="number" pInputText placeholder="Latitud">
+                <input pInputText formControlName="latitud" [(ngModel)]="velocidad.latitud" type="number" pInputText
+                    placeholder="Latitud">
             </div>
         </div>
 
         <div class="ui-g-12 ui-md-6">
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon"><i class="pi pi-map-marker"></i></span>
-                <input pInputText formControlName="longitud" [(ngModel)]="velocidad.longitud" type="number" pInputText placeholder="Longitud">
+                <input pInputText formControlName="longitud" [(ngModel)]="velocidad.longitud" type="number" pInputText
+                    placeholder="Longitud">
             </div>
         </div>
 
         <div class="ui-g-12 ui-md-6">
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon"><i class="pi pi-sun-o"></i></span>
-                <input pInputText formControlName="velocidadPrimaria" min="0" max="80" [(ngModel)]="velocidad.velocidadPrimaria" type="number" pInputText placeholder="Velocidad Primaria">
+                <input pInputText formControlName="velocidadPrimaria" min="0" max="80"
+                    [(ngModel)]="velocidad.velocidadPrimaria" type="number" pInputText placeholder="Velocidad Primaria">
                 <span class="ui-inputgroup-addon">Km/h</span>
             </div>
         </div>
@@ -29,7 +40,9 @@
         <div class="ui-g-12 ui-md-6">
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon"><i class="pi pi-road"></i></span>
-                <input pInputText formControlName="velocidadSecundaria" min="{{velocidad.velocidadPrimaria}}" max="80" [(ngModel)]="velocidad.velocidadSecundaria" type="number" pInputText placeholder="Velocidad Secundaria">
+                <input pInputText formControlName="velocidadSecundaria" min="{{velocidad.velocidadPrimaria}}" max="80"
+                    [(ngModel)]="velocidad.velocidadSecundaria" type="number" pInputText
+                    placeholder="Velocidad Secundaria">
                 <span class="ui-inputgroup-addon">Km/h</span>
             </div>
         </div>
@@ -37,7 +50,9 @@
         <div class="ui-g-12 ui-md-6">
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon"><i class="pi pi-sun-o"></i></span>
-                <input pInputText formControlName="velocidadTerciaria" min="{{velocidad.velocidadSecundaria}}" max="80" [(ngModel)]="velocidad.velocidadTerciaria" type="number" pInputText placeholder="Velocidad Terciaria">
+                <input pInputText formControlName="velocidadTerciaria" min="{{velocidad.velocidadSecundaria}}" max="80"
+                    [(ngModel)]="velocidad.velocidadTerciaria" type="number" pInputText
+                    placeholder="Velocidad Terciaria">
                 <span class="ui-inputgroup-addon">Km/h</span>
             </div>
         </div>
@@ -45,11 +60,14 @@
         <div class="ui-g-12 ui-md-6">
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon"><i class="pi pi-road"></i></span>
-                <input pInputText formControlName="velocidadCuarta" min="{{velocidad.velocidadTerciaria}}" max="80" [(ngModel)]="velocidad.velocidadCuarta" type="number" pInputText placeholder="Velocidad Cuarta">
+                <input pInputText formControlName="velocidadCuarta" min="{{velocidad.velocidadTerciaria}}" max="80"
+                    [(ngModel)]="velocidad.velocidadCuarta" type="number" pInputText placeholder="Velocidad Cuarta">
                 <span class="ui-inputgroup-addon">Km/h</span>
             </div>
         </div>
     </div>
-    <button pButton type="submit" icon="pi pi-save" [disabled]="!velocidadForm.valid" label="Guardar" class="ui-button-rounded ui-button-success"></button>
-    <button pButton type="button" icon="pi pi-times" (click)="cancelSave()" label="Cancelar" class="ui-button-rounded ui-button-secondary"></button>
+    <button pButton type="submit" icon="pi pi-save" [disabled]="!velocidadForm.valid" label="Guardar"
+        class="ui-button-rounded ui-button-success"></button>
+    <button pButton type="button" icon="pi pi-times" (click)="cancelSave()" label="Cancelar"
+        class="ui-button-rounded ui-button-secondary"></button>
 </form>

@@ -1,33 +1,49 @@
 <p-progressBar *ngIf="isLoading" mode="indeterminate"></p-progressBar>
 <form [formGroup]="sugerenciaForm" (ngSubmit)="sugerenciaForm.valid && generateSugerencia()">
+
     <div class="ui-g ui-fluid">
+        <div class="ui-g 12 ui-md-12">
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="pi pi-home"></i></span>
+                <p-dropdown [options]="velocidades" filter="true" placeholder="Seleccione un punto" [(ngModel)]="punto"
+                    optionLabel="nombrePunto" formControlName="punto" (ngModelChange)="puntoChange($event)">
+                </p-dropdown>
+            </div>
+        </div>
         <div class="ui-g-12 ui-md-6">
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon"><i class="pi pi-map-marker"></i></span>
-                <input pInputText formControlName="latitud" [(ngModel)]="sugerencia.latitud" type="number" pInputText placeholder="Latitud">
+                <input pInputText formControlName="latitud" readonly="true" [(ngModel)]="sugerencia.latitud"
+                    type="number" pInputText placeholder="Latitud">
             </div>
         </div>
 
         <div class="ui-g-12 ui-md-6">
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon"><i class="pi pi-map-marker"></i></span>
-                <input pInputText formControlName="longitud" [(ngModel)]="sugerencia.longitud" type="number" pInputText placeholder="Longitud">
+                <input pInputText formControlName="longitud" readonly="true" [(ngModel)]="sugerencia.longitud"
+                    type="number" pInputText placeholder="Longitud">
             </div>
         </div>
 
         <div class="ui-g ui-md-6">
             <div class="ui-inputgroup">
-                <p-dropdown [options]="nivelesLluvia" placeholder="Seleccione un nivel de lluvia" filter="true" formControlName="intensidadLluvia" [(ngModel)]="sugerencia.intensidadLluvia"></p-dropdown>
+                <p-dropdown [options]="nivelesLluvia" placeholder="Seleccione un nivel de lluvia" filter="true"
+                    formControlName="intensidadLluvia" [(ngModel)]="sugerencia.intensidadLluvia"></p-dropdown>
             </div>
         </div>
 
         <div class="ui-g ui-md-6">
             <div class="ui-inputgroup">
-                <p-dropdown [options]="estadosCarretera" placeholder="Seleccione el estado de la carretera" filter="true" formControlName="estadoCarretera" [(ngModel)]="sugerencia.estadoCarretera"></p-dropdown>
+                <p-dropdown [options]="estadosCarretera" placeholder="Seleccione el estado de la carretera"
+                    filter="true" formControlName="estadoCarretera" [(ngModel)]="sugerencia.estadoCarretera">
+                </p-dropdown>
             </div>
         </div>
     </div>
 
-    <button pButton type="submit" icon="pi pi-save" [disabled]="!sugerenciaForm.valid" label="Calcular Velocidad" class="ui-button-rounded ui-button-success"></button>
-    <button pButton type="button" icon="pi pi-times" (click)="cancelSave()" label="Cancelar" class="ui-button-rounded ui-button-secondary"></button>
+    <button pButton type="submit" icon="pi pi-save" [disabled]="!sugerenciaForm.valid" label="Calcular Velocidad"
+        class="ui-button-rounded ui-button-success"></button>
+    <button pButton type="button" icon="pi pi-times" (click)="cancelSave()" label="Cancelar"
+        class="ui-button-rounded ui-button-secondary"></button>
 </form>

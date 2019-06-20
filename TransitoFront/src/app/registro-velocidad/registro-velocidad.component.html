@@ -6,6 +6,7 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
+            <th>Nombre del Punto</th>
             <th>Latitud</th>
             <th>Longitud</th>
             <th>Velocidad Primaria</th>
@@ -16,6 +17,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-velocidad>
         <tr (click)="selectVelocidad(velocidad)">
+            <td>{{velocidad.nombrePunto}}</td>
             <td>{{velocidad.latitud}}</td>
             <td>{{velocidad.longitud}}</td>
             <td>{{velocidad.velocidadPrimaria}}</td>

@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 public class VelocidadPuntoDTO {
     
     private Integer idvelocidad;
+    private String nombrePunto;
     private Double latitud;
     private Double longitud;
     private Integer velocidadPrimaria;

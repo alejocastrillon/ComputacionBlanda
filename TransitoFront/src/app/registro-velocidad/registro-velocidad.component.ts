@@ -48,6 +48,7 @@ export class RegistroVelocidadComponent implements OnInit {
   public selectVelocidad(velocidad: VelocidadPunto): void {
     let vel: VelocidadPunto = new VelocidadPunto();
     vel.idvelocidad = velocidad.idvelocidad;
+    vel.nombrePunto = velocidad.nombrePunto;
     vel.latitud = velocidad.latitud;
     vel.longitud = velocidad.longitud;
     vel.velocidadPrimaria = velocidad.velocidadPrimaria;

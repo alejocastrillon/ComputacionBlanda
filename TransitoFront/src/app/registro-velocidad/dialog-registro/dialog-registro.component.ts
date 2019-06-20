@@ -33,7 +33,7 @@ export class DialogRegistroComponent implements OnInit {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       })
     ],
-    zoom: 13,
+    zoom: 20,
   };
 
   constructor(private dialogRef: DynamicDialogRef, private data: DynamicDialogConfig, private formBuilder: FormBuilder, private service: RegistroVelocidadService) {
@@ -42,8 +42,10 @@ export class DialogRegistroComponent implements OnInit {
 
   ngOnInit() {
     this.validateForm();
+    debugger;
     if (this.velocidad.latitud != null) {
-      this.map.setView(new L.LatLng(this.velocidad.latitud, this.velocidad.longitud));
+      this.latitude = this.velocidad.latitud;
+      this.longitud =  this.velocidad.longitud;
     } else {
       this.setCurrentPosition();
     }
@@ -51,6 +53,9 @@ export class DialogRegistroComponent implements OnInit {
 
   public validateForm(): void {
     this.velocidadForm = this.formBuilder.group({
+      'nombrePunto': [this.velocidad.nombrePunto, [
+        Validators.required
+      ]],
       'latitud': [this.velocidad.latitud, [
         Validators.required
       ]],
@@ -93,7 +98,6 @@ export class DialogRegistroComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitud = position.coords.longitude;
-        this.map.setView(new L.LatLng(this.latitude, this.longitud));
       });
     }
   }
